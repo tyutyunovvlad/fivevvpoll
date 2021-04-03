@@ -1,0 +1,46 @@
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!data?.alternatives">
+
+    <h3>Нове опитування</h3>
+    <mat-form-field class="field">
+        <mat-label>Назва</mat-label>
+        <input formControlName="name" matInput type="text" maxlength="126" autocomplete="off">
+
+    </mat-form-field> 
+
+    <mat-form-field class="field">
+        <mat-label>Код доступу (5-20)</mat-label>
+        <input formControlName="id" matInput type="text" autocomplete="off">
+    </mat-form-field> 
+
+    <mat-form-field class="field alt-count">
+        <mat-label>Кількість альтернатив (1-10)</mat-label>
+        <input formControlName="count" matInput type="number" autocomplete="off" min="1" max="10">
+    </mat-form-field> 
+    <p class="metrics-select">
+        Тип шкали оцінювання:
+        <mat-button-toggle-group [(ngModel)]="selectedMetric" name="fontStyle" aria-label="Font Style" [ngModelOptions]="{standalone: true}">
+            <mat-button-toggle class="variant" *ngFor="let type of metrics; let i = index" [value]="i">
+                <span *ngFor="let el of type.values">{{el}}</span>
+            </mat-button-toggle>
+            
+        </mat-button-toggle-group>
+    </p>
+    <button mat-button color="primary" type="submit" [disabled]="form.invalid"> Далі </button>
+
+    <button class="close-button" mat-button matSuffix mat-icon-button (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</form>
+
+
+<form class="alternatives" [formGroup]="alternativesForm" *ngIf="alternativesForm" (ngSubmit)="onSubmitAlternatives()">
+    <h3>Введіть назви альтернатив</h3>
+    <div class="inputs">
+        <mat-form-field class="field" *ngFor="let alt of data?.alternatives; let i = index">
+            <mat-label>Альтернатива {{i+1}}</mat-label>
+            <input [formControlName]="i" class="alternative" matInput type="text" autocomplete="off">
+        </mat-form-field> 
+    </div>
+
+    <button mat-button color="primary" type="submit" [disabled]="alternativesForm.invalid"> Далі </button>
+</form>

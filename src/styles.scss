@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap');
+html,
+body {
+    height: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+* {
+    box-sizing: border-box;
+}
+
+::ng-deep .cdk-overlay-pane {
+    max-width: 95vw !important;
+}

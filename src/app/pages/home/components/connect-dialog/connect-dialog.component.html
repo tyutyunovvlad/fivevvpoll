@@ -1,0 +1,12 @@
+<div class="form">
+    <h3>Приєднатись до опитування</h3>
+    <mat-form-field class="example-form-field">
+        <mat-label>Код доступу</mat-label>
+        <input matInput type="text" [(ngModel)]="id" autocomplete="off">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="id = ''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field> 
+    
+    <button mat-button color="primary" (click)="connect()"> Приєднатись</button>
+</div>

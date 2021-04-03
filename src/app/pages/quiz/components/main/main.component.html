@@ -1,0 +1,89 @@
+<div class="wrapper" [class]="markType">
+    <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
+
+    <div class="results">
+        <h2>Назва опитування: <span class="name">{{ name }}</span></h2>
+
+        <div class="info">
+            <p>Код доступу: {{code}}</p>
+            <p>Кількість опитуваних: {{votes?.length || 0}}</p>
+            <p *ngIf="times[0]">Перша відповідь: {{times[0] | date:'medium'}}</p>
+            <p *ngIf="times[1]">Остання відповідь: {{times[1] | date:'medium'}}</p>
+            <p style="cursor: pointer;" (click)="copy('https://fivevvpoll.web.app/?id='+code)">Посилання на опитування:
+                <input id="link" style="color: #072949; cursor: pointer;"
+                    value="https://fivevvpoll.web.app/?id={{code}}" disabled></p>
+        </div>
+
+        <div style="color: #072949; text-transform: uppercase; margin-top: 30px;" class="no" *ngIf="!votes?.length"> Ще
+            немає відповідей</div>
+
+        <h2 *ngIf="votes?.length">Результати опитування:</h2>
+
+        <div class="res-2" *ngIf="votes?.length">
+            <div class="alt" *ngFor="let alt of alternatives; let i = index" [style]="'order:'+((getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
+                            (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
+                            (getNumberOfMarks(bars[i].marks, 2) * (markType==='centered' ? 0 : 3)) +
+                            (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
+                            (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5))) + ';'">
+                <div class="title">{{alt}}</div>
+                <div class="line">
+                    <div class="bar">
+                        <div [attr.mark]="0" *ngIf="getNumberOfMarks(bars[i].marks, 0)"
+                            [style]="'width:' + getNumberOfMarks(bars[i].marks, 0) * 100 / bars[i].marks.length + '%' "
+                            class="mark">
+                            <p>{{getNumberOfMarks(bars[i].marks, 0)}}</p>
+                            <p *ngIf="getNumberOfMarks(bars[i].marks, 0) * 100 / bars[i].marks.length > 10">{{(getNumberOfMarks(bars[i].marks, 0) * 100 / bars[i].marks.length).toFixed(1)}}%</p>
+                        </div>
+                        <div [attr.mark]="1" *ngIf="getNumberOfMarks(bars[i].marks, 1)"
+                            [style]="'width:' + getNumberOfMarks(bars[i].marks, 1) * 100 / bars[i].marks.length + '%' "
+                            class="mark">
+                            <p>{{getNumberOfMarks(bars[i].marks, 1)}}</p>
+                            <p *ngIf="getNumberOfMarks(bars[i].marks, 1) * 100 / bars[i].marks.length > 10">{{(getNumberOfMarks(bars[i].marks, 1) * 100 / bars[i].marks.length).toFixed(1)}}%</p>
+                        </div>
+                        <div [attr.mark]="2" *ngIf="getNumberOfMarks(bars[i].marks, 2)"
+                            [style]="'width:' + getNumberOfMarks(bars[i].marks, 2) * 100 / bars[i].marks.length + '%' "
+                            class="mark">
+                            <p>{{getNumberOfMarks(bars[i].marks, 2)}}</p>
+                            <p *ngIf="getNumberOfMarks(bars[i].marks, 2) * 100 / bars[i].marks.length > 10">{{(getNumberOfMarks(bars[i].marks, 2) * 100 / bars[i].marks.length).toFixed(1)}}%</p>
+                        </div>
+                        <div [attr.mark]="3" *ngIf="getNumberOfMarks(bars[i].marks, 3)"
+                            [style]="'width:' + getNumberOfMarks(bars[i].marks, 3) * 100 / bars[i].marks.length + '%' "
+                            class="mark">
+                            <p>{{getNumberOfMarks(bars[i].marks, 3)}}</p>
+                            <p *ngIf="getNumberOfMarks(bars[i].marks, 3) * 100 / bars[i].marks.length > 10">{{(getNumberOfMarks(bars[i].marks, 3) * 100 / bars[i].marks.length).toFixed(1)}}%</p>
+                        </div>
+                        <div [attr.mark]="4" *ngIf="getNumberOfMarks(bars[i].marks, 4)"
+                            [style]="'width:' + getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length + '%' "
+                            class="mark">
+                            <p>{{getNumberOfMarks(bars[i].marks, 4)}}</p>
+                            <p *ngIf="getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length > 10">{{(getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length).toFixed(1)}}%</p>
+                        </div>
+                    </div>
+                    <div class="total">
+                        {{
+                        (getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
+                        (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
+                        (getNumberOfMarks(bars[i].marks, 2) * (markType==='centered' ? 0 : 3)) +
+                        (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
+                        (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5))
+                        }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="res-1" *ngIf="votes?.length">
+            <div class="head">
+                <span class="empty"></span>
+                <span class="alt" *ngFor="let alt of alternatives" [title]="alt"> {{alt}} </span>
+            </div>
+            <div class="vote" *ngFor="let vote of votes">
+                <span class="name" [title]="vote.name">{{vote.name}}</span>
+                <span class="mark" *ngFor="let mark of vote.votes" [attr.mark]="mark"
+                    [title]="markType === 'centered' ? +mark-2 : +mark+1"></span>
+            </div>
+        </div>
+    </div>
+</div>

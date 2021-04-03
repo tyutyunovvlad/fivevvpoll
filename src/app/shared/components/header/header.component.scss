@@ -1,0 +1,33 @@
+:host {
+    width: 100vw;
+    z-index: 2;
+}
+
+.wrapper {
+    mat-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #082f54;
+        position: relative;
+
+        h1 {
+            font-weight: 700;
+        }
+
+        .logo {
+            background-image: url('/assets/logo.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            width: 175px;
+            height: 100%;
+        }
+        button {
+            color: whitesmoke;
+            position: absolute;
+            right: 20px;
+        }
+
+    }
+}

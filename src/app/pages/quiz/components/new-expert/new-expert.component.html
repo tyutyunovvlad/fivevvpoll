@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <h3>Новий експерт</h3>
+    <mat-form-field class="field">
+        <mat-label>Ім'я</mat-label>
+        <input [(ngModel)]="name"  matInput type="text" autocomplete="off">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field> 
+
+    <button mat-button color="primary" type="submit" [disabled]="!name?.trim().length" (click)="submit()"> Далі </button>
+</div>
