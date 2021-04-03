@@ -26,7 +26,7 @@ export class MainComponent implements OnInit, OnDestroy {
   public bars = [];
 
   public mainResults = [
-   
+
   ];
 
   constructor(
@@ -96,7 +96,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   public newExpert(): void {
-    this.dialog.open(NewExpertComponent, {scrollStrategy: new NoopScrollStrategy()});
+    this.dialog.open(NewExpertComponent, { scrollStrategy: new NoopScrollStrategy() });
   }
 
   public getNumberOfMarks(marks, i) {
@@ -116,8 +116,8 @@ export class MainComponent implements OnInit, OnDestroy {
   public generateMain() {
 
     let arr = [];
-    let max = 0;
-    let min = 0;
+    let max = -100000;
+    let min = 100000;
 
     this.bars.forEach((v, i) => {
       if (this.bars[i]) {
@@ -134,35 +134,58 @@ export class MainComponent implements OnInit, OnDestroy {
         if (mark < min) {
           min = mark;
         }
-        arr.push({mark});
+        arr.push({ mark });
       }
     });
 
-    arr.forEach((v, i) => {
-      if (arr[i].mark > 0) {
+    if (this.markType === "centered") {
+
+      arr.forEach((v, i) => {
+        if (arr[i].mark > 0) {
+          arr[i].per = v.mark * 100 / max;
+        } else if (arr[i].mark < 0) {
+          arr[i].per = v.mark * 100 / min;
+        }
+
+        if (arr[i].mark === 0) {
+          arr[i].color = 2;
+        } else if (arr[i].mark === max) {
+          arr[i].color = 4;
+        } else if (arr[i].mark === min) {
+          arr[i].color = 0;
+        } else if (arr[i].mark > 0) {
+          arr[i].color = 3;
+        } else if (arr[i].mark < 0) {
+          arr[i].color = 1;
+        }
+      });
+
+    } else if (this.markType === 'ladder') {
+      arr.forEach((v, i) => {
         arr[i].per = v.mark * 100 / max;
-      } else if (arr[i].mark < 0) {
-        arr[i].per = v.mark * 100 / min;
-      }
+        console.log(min);
 
-      if (arr[i].mark === 0) {
-        arr[i].color = 2;
-      } else if (arr[i].mark === max) {
-        arr[i].color = 4;
-      } else if (arr[i].mark === min) {
-        arr[i].color = 0;
-      } else if (arr[i].mark > 0) {
-        arr[i].color = 3;
-      } else if (arr[i].mark < 0) {
-        arr[i].color = 1;
-      }
-    });
+        let center = Math.round(min + (max - min) / 2);
+        console.log(center);
+        
+        
+        if (arr[i].mark === min) {
+          arr[i].color = 0;
+        } else if (arr[i].mark === max) {
+          arr[i].color = 4;
+        } else if (arr[i].mark === center) {
+          arr[i].color = 2;
+        } else if (arr[i].mark > center) {
+          arr[i].color = 3;
+        } else if (arr[i].mark < center) {
+          arr[i].color = 1;
+        }
+      });
+    }
 
-    console.log(arr);
-    
 
     this.mainResults = arr;
-    
+
 
 
   }
