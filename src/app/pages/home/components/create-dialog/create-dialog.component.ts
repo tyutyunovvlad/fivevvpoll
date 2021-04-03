@@ -22,7 +22,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
 
   constructor(private mainService: MainService, public dialog: MatDialog, private errorService: ErrorService) {
     this.metrics = this.mainService.metrics;
-    
+
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       id: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
@@ -56,7 +56,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
 
         this.alternativesForm = new FormGroup({});
         for (let i = 0; i < this.data.count; i++) {
-          this.alternativesForm.addControl(`${i}`, new FormControl(`Альтернатива ${i + 1}`, Validators.required));
+          this.alternativesForm.addControl(`${i}`, new FormControl(`Альтернатива ${i + 1}`, [Validators.required, Validators.maxLength(50)]));
           this.data.alternatives.push('');
         }
       } else {
@@ -64,21 +64,21 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
       }
     }));
 
-    
+
   }
 
   public onSubmitAlternatives(): void {
     // tslint:disable: forin
     for (const i in this.alternativesForm?.value) {
       for (const j in this.alternativesForm?.value) {
-        if (this.alternativesForm?.value[i] === this.alternativesForm?.value[j] && i !==j) {
+        if (this.alternativesForm?.value[i] === this.alternativesForm?.value[j] && i !== j) {
           this.errorService.showAltErrors();
           return;
-          
+
         }
       }
-      
-      
+
+
       this.data.alternatives[i] = this.alternativesForm?.value[i];
     }
 
@@ -89,5 +89,18 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
 
   public close() {
     this.dialog.closeAll();
+  }
+
+  public generateID(e) {
+    e.preventDefault();
+
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < Math.random() * (20 - 5) + 5; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    this.form.controls.id.setValue(result);
   }
 }

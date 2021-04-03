@@ -3,13 +3,16 @@
     <h3>Нове опитування</h3>
     <mat-form-field class="field">
         <mat-label>Назва</mat-label>
-        <input formControlName="name" matInput type="text" maxlength="126" autocomplete="off">
+        <input formControlName="name" matInput type="text" maxlength="50" autocomplete="off">
 
     </mat-form-field> 
 
     <mat-form-field class="field">
         <mat-label>Код доступу (5-20)</mat-label>
-        <input formControlName="id" matInput type="text" autocomplete="off">
+        <input formControlName="id" matInput type="text" autocomplete="off" maxlength="20">
+        <button  mat-button matSuffix mat-icon-button (click)="generateID($event)">
+            <mat-icon>autorenew</mat-icon>
+        </button>
     </mat-form-field> 
 
     <mat-form-field class="field alt-count">
@@ -38,7 +41,7 @@
     <div class="inputs">
         <mat-form-field class="field" *ngFor="let alt of data?.alternatives; let i = index">
             <mat-label>Альтернатива {{i+1}}</mat-label>
-            <input [formControlName]="i" class="alternative" matInput type="text" autocomplete="off">
+            <input [formControlName]="i" class="alternative" matInput type="text" autocomplete="off" maxlength="50">
         </mat-form-field> 
     </div>
 

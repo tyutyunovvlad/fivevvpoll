@@ -1,11 +1,10 @@
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { IVote, MainService } from 'src/app/shared/services/main.service';
 import { NewExpertComponent } from '../new-expert/new-expert.component';
-import { RouterErrorComponent } from '../../../../shared/errors/router-error/router-error.component';
 
 @Component({
   selector: 'app-main',
@@ -19,11 +18,16 @@ export class MainComponent implements OnInit, OnDestroy {
   public alternatives: Array<string>;
   public markType: string;
   public code: string;
+  public extended = false;
 
   public times = [];
   private subs = [];
 
   public bars = [];
+
+  public mainResults = [
+   
+  ];
 
   constructor(
     private dialog: MatDialog,
@@ -62,7 +66,9 @@ export class MainComponent implements OnInit, OnDestroy {
             });
             this.bars[i].marks.sort();
 
+
           });
+          this.generateMain();
         }));
 
       } else {
@@ -90,7 +96,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   public newExpert(): void {
-    this.dialog.open(NewExpertComponent);
+    this.dialog.open(NewExpertComponent, {scrollStrategy: new NoopScrollStrategy()});
   }
 
   public getNumberOfMarks(marks, i) {
@@ -101,6 +107,64 @@ export class MainComponent implements OnInit, OnDestroy {
     navigator.clipboard.writeText(text);
 
     this.errorService.showCopied();
+  }
+
+  public extend() {
+    this.extended = !this.extended;
+  }
+
+  public generateMain() {
+
+    let arr = [];
+    let max = 0;
+    let min = 0;
+
+    this.bars.forEach((v, i) => {
+      if (this.bars[i]) {
+
+        let mark = (this.getNumberOfMarks(this.bars[i].marks, 0) * (this.markType === 'centered' ? -2 : 1)) +
+          (this.getNumberOfMarks(this.bars[i].marks, 1) * (this.markType === 'centered' ? -1 : 2)) +
+          (this.getNumberOfMarks(this.bars[i].marks, 2) * (this.markType === 'centered' ? 0 : 3)) +
+          (this.getNumberOfMarks(this.bars[i].marks, 3) * (this.markType === 'centered' ? 1 : 4)) +
+          (this.getNumberOfMarks(this.bars[i].marks, 4) * (this.markType === 'centered' ? 2 : 5));
+
+        if (mark > max) {
+          max = mark;
+        }
+        if (mark < min) {
+          min = mark;
+        }
+        arr.push({mark});
+      }
+    });
+
+    arr.forEach((v, i) => {
+      if (arr[i].mark > 0) {
+        arr[i].per = v.mark * 100 / max;
+      } else if (arr[i].mark < 0) {
+        arr[i].per = v.mark * 100 / min;
+      }
+
+      if (arr[i].mark === 0) {
+        arr[i].color = 2;
+      } else if (arr[i].mark === max) {
+        arr[i].color = 4;
+      } else if (arr[i].mark === min) {
+        arr[i].color = 0;
+      } else if (arr[i].mark > 0) {
+        arr[i].color = 3;
+      } else if (arr[i].mark < 0) {
+        arr[i].color = 1;
+      }
+    });
+
+    console.log(arr);
+    
+
+    this.mainResults = arr;
+    
+
+
   }
 
 }

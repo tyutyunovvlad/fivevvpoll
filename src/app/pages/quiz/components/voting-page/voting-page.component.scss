@@ -4,6 +4,9 @@
 
     .name {
         display: block;
+        overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
     }
 
     .buttons {
@@ -22,10 +25,15 @@
     .questions {
         .question {
             margin: 5px 0;
+            display: flex;
+            align-items: center;
             .title {
                 display: inline-block;
                 margin-right: 10px;
                 width: 110px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
             ::ng-deep .mat-button-toggle {
                 display: flex;

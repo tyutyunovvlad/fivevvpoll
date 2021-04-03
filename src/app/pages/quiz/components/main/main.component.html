@@ -1,6 +1,4 @@
 <div class="wrapper" [class]="markType">
-    <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
-
     <div class="results">
         <h2>Назва опитування: <span class="name">{{ name }}</span></h2>
 
@@ -19,13 +17,38 @@
 
         <h2 *ngIf="votes?.length">Результати опитування:</h2>
 
-        <div class="res-2" *ngIf="votes?.length">
+        <div class="res-3" *ngIf="votes?.length">
+            <div class="alt" *ngFor="let alt of alternatives; let i = index" 
+                [style]="'order:'+ mainResults[i].mark + ';'"
+            >
+                
+                <div class="span" [ngStyle]="{left: (mainResults[i].mark < 0 ? '55%' : '-50%')}"><span [title]="alt">{{alt}}</span></div>
+                <div
+                    class="line mark"
+                    [attr.mark]="mainResults[i].color"
+                    [ngStyle]="{width: (mainResults[i].mark !== 0 ? mainResults[i].per : 10) + '%', transform: mainResults[i].mark === 0 ?'translate(-50%,0)':'unset'}" 
+                    [style]="(mainResults[i].mark >= 0 ? 'left:' : 'right:') + (mainResults[i].mark >= 0 ? '50%' :  mainResults[i].per-50+'%') "
+                >
+                    
+                <span class="total">
+                    {{mainResults[i].mark}}
+                </span>
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
+        <button mat-raised-button class="ext" (click)="extend()" *ngIf="votes?.length">{{extended ? 'Згорнути' : 'Детальніше'}}</button>
+
+        <div class="res-2" *ngIf="votes?.length && extended">
             <div class="alt" *ngFor="let alt of alternatives; let i = index" [style]="'order:'+((getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
                             (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
                             (getNumberOfMarks(bars[i].marks, 2) * (markType==='centered' ? 0 : 3)) +
                             (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
                             (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5))) + ';'">
-                <div class="title">{{alt}}</div>
+                <div class="title" [title]="alt">{{alt}}</div>
                 <div class="line">
                     <div class="bar">
                         <div [attr.mark]="0" *ngIf="getNumberOfMarks(bars[i].marks, 0)"
@@ -59,7 +82,7 @@
                             <p *ngIf="getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length > 10">{{(getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length).toFixed(1)}}%</p>
                         </div>
                     </div>
-                    <div class="total">
+                    <!-- <div class="total">
                         {{
                         (getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
                         (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
@@ -67,14 +90,14 @@
                         (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
                         (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5))
                         }}
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
 
         <br>
 
-        <div class="res-1" *ngIf="votes?.length">
+        <div class="res-1" *ngIf="votes?.length && extended">
             <div class="head">
                 <span class="empty"></span>
                 <span class="alt" *ngFor="let alt of alternatives" [title]="alt"> {{alt}} </span>

@@ -5,10 +5,18 @@
     align-items: center;
     padding-bottom: 30px;
 
-    button.new {
-        background: #ffbb40;
+    button {
         color: white;
-        margin-top: 32px;
+        margin: 30px 0;
+        width: 130px;
+        &.ext {
+            background: #153dae;
+        }
+        &.new {
+            background: #ff6a00;
+            margin-right: 10px;
+
+        }
     }
 
     .results {
@@ -53,7 +61,59 @@
                 white-space: nowrap;
                 margin-right: 5px;
             }
+        }
+    }
 
+    .res-3 {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+
+        .alt {
+            margin-bottom: 10px;
+            width: 250px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            .span {
+                position: absolute;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 235px;
+            }
+        }
+
+        .title {
+            font-style: italic;
+        }
+        .line {
+            display: flex;
+            align-items: center;
+            user-select: none;
+            position: relative;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .bar {
+            width: 500px;
+            height: 50px;
+            display: flex;
+
+            .mark {
+                min-width: 0px;
+                border-radius: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                p {
+                    margin: 0;
+                }
+            }
         }
     }
 
@@ -64,10 +124,14 @@
 
         .alt {
             margin-bottom: 10px;
+            width: 500px;
         }
 
         .title {
             font-style: italic;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
         .line {
             display: flex;
@@ -141,7 +205,18 @@
                     width: 100%;
                 }
             }
-            
+        }
+
+        .res-3 {
+            .alt {
+                width: 50%;
+                .span {
+                    width: 100%;
+                }
+                .bar {
+                    width: 100%;
+                }
+            }
         }
     }
 }
@@ -201,4 +276,3 @@
         width: 100%;
     }
 }
-

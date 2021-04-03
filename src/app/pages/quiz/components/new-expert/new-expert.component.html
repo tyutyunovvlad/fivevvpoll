@@ -2,7 +2,7 @@
     <h3>Новий експерт</h3>
     <mat-form-field class="field">
         <mat-label>Ім'я</mat-label>
-        <input [(ngModel)]="name"  matInput type="text" autocomplete="off">
+        <input [(ngModel)]="name"  matInput type="text" autocomplete="off" maxlength="50">
         <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
             <mat-icon>close</mat-icon>
         </button>

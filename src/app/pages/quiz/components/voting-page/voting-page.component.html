@@ -4,7 +4,7 @@
 
     <div class="questions">
         <div class="question" *ngFor="let alt of alternatives; let i = index">
-            <span class="title">{{alt}}</span>
+            <span class="title" [title]="alt">{{alt}}</span>
             <mat-button-toggle-group [(ngModel)]="marks[i]">
                 <mat-button-toggle class="variant" *ngFor="let type of metric; let i = index" [value]="i">
                     <span>{{type}}</span>
