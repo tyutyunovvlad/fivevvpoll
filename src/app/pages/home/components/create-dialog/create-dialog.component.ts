@@ -41,7 +41,16 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  public onSubmit(): void {
+  public onSubmit(e): void {
+    e.preventDefault();
+
+    if (this.form.value.name.trim().length === 0 || this.form.value.id.trim().length === 0) {
+      console.log();
+      
+      this.form.controls.name.setValue(this.form.value.name.trim());
+      this.form.controls.id.setValue(this.form.value.id.trim());
+      return;
+    }
 
     this.subs.push(this.mainService.checkIfExist(this.form.value.id.trim()).subscribe(exist => {
       if (!exist) {
@@ -53,6 +62,8 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
           alternatives: [],
           votes: []
         };
+
+       
 
         this.alternativesForm = new FormGroup({});
         for (let i = 0; i < this.data.count; i++) {
@@ -74,8 +85,11 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
         if (this.alternativesForm?.value[i] === this.alternativesForm?.value[j] && i !== j) {
           this.errorService.showAltErrors();
           return;
-
         }
+      }
+      if (this.alternativesForm.value[i].trim().length === 0) {
+        this.alternativesForm.controls[i].setValue('');
+        return;
       }
 
 
