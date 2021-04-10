@@ -3,10 +3,10 @@
         <h2>Назва опитування: <span class="name">{{ name }}</span></h2>
 
         <div class="info">
-            <p>Код доступу: {{code}}</p>
-            <p>Кількість опитуваних: {{votes?.length || 0}}</p>
-            <p *ngIf="times[0]">Перша відповідь: {{times[0] | date:'medium'}}</p>
-            <p *ngIf="times[1]">Остання відповідь: {{times[1] | date:'medium'}}</p>
+            <p>Код доступу: <span>{{code}}</span></p>
+            <p>Кількість опитуваних:<span> {{votes?.length || 0}}</span></p>
+            <p *ngIf="times[0]">Перша відповідь: <span>{{times[0] | date:'medium'}}</span></p>
+            <p *ngIf="times[1]">Остання відповідь: <span>{{times[1] | date:'medium'}}</span></p>
             <p style="cursor: pointer;" (click)="copy('https://fivevvpoll.web.app/?id='+code)">Посилання на опитування:
                 <input id="link" style="color: #072949; cursor: pointer;"
                     value="https://fivevvpoll.web.app/?id={{code}}" disabled></p>
@@ -39,8 +39,12 @@
         </div>
 
 
-        <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
-        <button mat-raised-button class="ext" (click)="extend()" *ngIf="votes?.length">{{extended ? 'Згорнути' : 'Детальніше'}}</button>
+        <div class="buttons">
+            <button mat-raised-button class="ext" (click)="extend()" *ngIf="votes?.length && !extended">{{extended ? 'Згорнути' : 'Детальніше'}}</button>
+            <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
+        </div>
+        
+
 
         <div class="res-2" *ngIf="votes?.length && extended">
             <div class="alt" *ngFor="let alt of alternatives; let i = index" [style]="'order:'+((getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
@@ -82,7 +86,7 @@
                             <p *ngIf="getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length > 10">{{(getNumberOfMarks(bars[i].marks, 4) * 100 / bars[i].marks.length).toFixed(1)}}%</p>
                         </div>
                     </div>
-                    <!-- <div class="total">
+                    <div class="total">
                         {{
                         (getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
                         (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
@@ -90,7 +94,7 @@
                         (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
                         (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5))
                         }}
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>

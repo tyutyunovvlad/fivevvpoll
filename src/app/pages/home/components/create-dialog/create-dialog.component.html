@@ -39,9 +39,9 @@
 <form class="alternatives" [formGroup]="alternativesForm" *ngIf="alternativesForm" (ngSubmit)="onSubmitAlternatives()">
     <h3>Введіть назви альтернатив</h3>
     <div class="inputs">
-        <mat-form-field class="field" *ngFor="let alt of data?.alternatives; let i = index">
+        <mat-form-field class="field ng-dirty ng-touched" *ngFor="let alt of data?.alternatives; let i = index">
             <mat-label>Альтернатива {{i+1}}</mat-label>
-            <input [formControlName]="i" class="alternative" matInput type="text" autocomplete="off" maxlength="50">
+            <input (input)="kek()" [formControlName]="i" class="alternative ng-dirty ng-touched" matInput type="text" autocomplete="off" maxlength="50">
         </mat-form-field> 
     </div>
 

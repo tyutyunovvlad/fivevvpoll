@@ -111,10 +111,26 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for (var i = 0; i < Math.random() * (20 - 5) + 5; i++) {
+    for (var i = 0; i < 12; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
     this.form.controls.id.setValue(result);
+  }
+
+
+  public kek() {
+    for (const i in this.alternativesForm?.value) {
+      for (const j in this.alternativesForm?.value) {
+        if (this.alternativesForm?.value[i] === this.alternativesForm?.value[j] && i !== j) {
+          this.alternativesForm.controls[i].setErrors({'incorrect': true});
+          this.alternativesForm.markAllAsTouched();
+          this.alternativesForm.markAsDirty();
+          this.errorService.showAltErrors();
+
+          return;
+        }
+      }
+    }
   }
 }
