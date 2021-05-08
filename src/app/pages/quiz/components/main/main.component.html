@@ -8,7 +8,7 @@
             <p *ngIf="times[0]">Перша відповідь: <span>{{times[0] | date:'medium'}}</span></p>
             <p *ngIf="times[1]">Остання відповідь: <span>{{times[1] | date:'medium'}}</span></p>
             <p style="cursor: pointer;" (click)="copy('https://fivevvpoll.web.app/?id='+code)">Посилання на опитування:
-                <input id="link" style="color: #072949; cursor: pointer;"
+                <input id="link" style="color: #10599f; cursor: pointer; text-decoration: underline; font-weight: bold;"
                     value="https://fivevvpoll.web.app/?id={{code}}" disabled></p>
         </div>
 
@@ -99,9 +99,14 @@
             </div>
         </div>
 
+        <div class="buttons wide" *ngIf="extended">
+            <button mat-raised-button class="ext" (click)="extend2()" *ngIf="votes?.length && !extended2">Мапа переважань</button>
+            <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
+        </div>
+
         <br>
 
-        <div class="res-1" *ngIf="votes?.length && extended">
+        <div class="res-1"  *ngIf="votes?.length && extended2">
             <div class="head">
                 <span class="empty"></span>
                 <span class="alt" *ngFor="let alt of alternatives" [title]="alt"> {{alt}} </span>
@@ -112,5 +117,15 @@
                     [title]="markType === 'centered' ? +mark-2 : +mark+1"></span>
             </div>
         </div>
+
+        <div class="buttons" *ngIf="votes?.length > 20 && extended2">
+            <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
+        </div>
+
     </div>
+</div>
+
+
+<div class="toTop" *ngIf="extended" (click)="toTop()">
+    <mat-icon>arrow_upward</mat-icon>
 </div>

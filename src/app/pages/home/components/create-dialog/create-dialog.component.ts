@@ -16,7 +16,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
   public alternativesForm: FormGroup | undefined;
   public data: IData | undefined;
 
-  public selectedMetric = 0;
+  public selectedMetric = -1;
   public metrics = [];
   private subs = [];
 

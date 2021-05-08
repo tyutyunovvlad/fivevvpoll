@@ -1,22 +1,53 @@
+.toTop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+
+    right: 25px;
+    bottom: 10px;
+    z-index: 10;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    background: #ff6a00;
+    color: white;
+    cursor:  pointer;
+    
+    span {
+        margin-bottom: 10px;
+    }
+
+
+}
+
 .wrapper {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 30px;
+    position: relative;
 
 
     .buttons {
         display: flex;
         justify-content: center;
+
+        &.wide {
+            button {
+                width: 160px !important;
+            }
+        }
     }
     button {
         color: white;
         margin: 30px 0;
-        width: 130px;
+        width: 150px;
         &.ext {
             background: #15ae8a;
-            margin-right: 10px;
+            margin-right: 100px;
         }
         &.new {
             background: #ff6a00;
@@ -37,6 +68,9 @@
     }
 
     .info {
+        p {
+            margin: 5px auto;
+        }
         span {
             color: #10599f;
 
@@ -150,7 +184,7 @@
             }
         }
         .bar {
-            width: 500px;
+            min-width: 450px;
             height: 50px;
             display: flex;
 
@@ -210,6 +244,7 @@
             .alt {
                 width: 100%;
                 .bar {
+                    min-width: unset;
                     width: 100%;
                 }
             }
@@ -224,6 +259,12 @@
                 .bar {
                     width: 100%;
                 }
+            }
+        }
+
+        button {
+            &.ext {
+                margin-right: 30px;
             }
         }
     }

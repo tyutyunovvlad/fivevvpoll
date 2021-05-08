@@ -19,6 +19,7 @@ export class MainComponent implements OnInit, OnDestroy {
   public markType: string;
   public code: string;
   public extended = false;
+  public extended2 = false;
 
   public times = [];
   private subs = [];
@@ -113,6 +114,10 @@ export class MainComponent implements OnInit, OnDestroy {
     this.extended = !this.extended;
   }
 
+  public extend2() {
+    this.extended2 = !this.extended2;
+  }
+
   public generateMain() {
 
     let arr = [];
@@ -203,6 +208,12 @@ export class MainComponent implements OnInit, OnDestroy {
 
     this.mainResults = arr;
 
+  }
+
+  public toTop() {
+    console.log(1);
+    
+    document.body.scroll(0,0);
   }
 
 }

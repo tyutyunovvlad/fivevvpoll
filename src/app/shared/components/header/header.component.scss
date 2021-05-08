@@ -13,22 +13,37 @@
 
         h1 {
             font-weight: 700;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+
+            span {
+                font-size: 25px;
+            }
         }
 
-        .logo {
-            background-image: url('/assets/logo.png');
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-            width: 175px;
-            height: 100%;
-        }
         button {
-            color: whitesmoke;
             position: absolute;
-            right: 0;
+            color: whitesmoke;
+            left: 0;
             height: 100%;
             width: 64px;
+
+            mat-icon {
+                font-size: 32px;
+            }
+        }
+        
+
+        mat-select {
+            position: absolute;
+            left: 80%;
+            width: 65px;
+
+            ::ng-deep  .mat-select-arrow {
+                visibility: hidden;
+            }
         }
 
     }

@@ -21,8 +21,11 @@ export class HeaderComponent implements OnInit {
 
   public home(): void {
     if (this.id) {
-      alert('Не забудьте зберегти ключ доступу: ' + this.id);
+      if (confirm('Покинути опитування? Не забудьте зберегти код доступу: ' + this.id)) {
+        this.router.navigate(['home']);
+      } else {
+        return;
+      }
     }
-    this.router.navigate(['home']);
   }
 }

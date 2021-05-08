@@ -1,10 +1,14 @@
 <div class="wrapper">
     <mat-toolbar color="primary">
-        <!-- <div class="logo"></div> -->
-        <h1>FiveVVPoll</h1>
         <button mat-icon-button (click)="home()">
             <mat-icon>home</mat-icon>
         </button>
+
+        <h1 (click)="home()">Five<span>VV</span>Poll</h1>
+
+        <mat-select value="option1">
+            <mat-option value="option1">UKR</mat-option>
+        </mat-select>
     </mat-toolbar>
 
 

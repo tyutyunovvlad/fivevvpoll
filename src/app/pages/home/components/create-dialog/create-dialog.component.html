@@ -28,8 +28,7 @@
             
         </mat-button-toggle-group>
     </p>
-    <button mat-button color="primary" (click)="onSubmit($event)" type="submit" [disabled]="form.invalid"> Далі </button>
-
+    <button mat-button color="primary" (click)="onSubmit($event)" type="submit" [disabled]="form.invalid || selectedMetric < 0"> Далі </button>
     <button class="close-button" mat-button matSuffix mat-icon-button (click)="close()">
         <mat-icon>close</mat-icon>
     </button>

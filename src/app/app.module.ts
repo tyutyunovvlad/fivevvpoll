@@ -27,6 +27,7 @@ import { registerLocaleData } from '@angular/common';
 import localeUa from '@angular/common/locales/uk';
 import { CopiedComponent } from './shared/errors/copied/copied.component';
 import { AlternativesComponent } from './shared/errors/alternatives/alternatives.component';
+import {MatSelectModule} from '@angular/material/select';
 
 registerLocaleData(localeUa, 'ua');
 
@@ -67,7 +68,8 @@ const firebaseConfig = {
     MatIconModule,
     MatButtonToggleModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'ua'}],
   bootstrap: [AppComponent]
