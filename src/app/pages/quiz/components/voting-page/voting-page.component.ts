@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { IVote, IData, MainService } from 'src/app/shared/services/main.service';
 import { RouterErrorComponent } from '../../../../shared/errors/router-error/router-error.component';
@@ -16,6 +17,7 @@ export class VotingPageComponent implements OnInit, OnDestroy {
   public expertName: string;
   public metric: Array<string>;
   public alternatives: Array<string>;
+  private type;
 
   public marks = [];
   private subs = [];
@@ -23,11 +25,23 @@ export class VotingPageComponent implements OnInit, OnDestroy {
   constructor(
     private mainService: MainService,
     private router: Router,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private transateServer: TranslateService
   ) {
+    this.transateServer.onLangChange.subscribe(res => {
+      setTimeout(() => {
+        
+        this.metric = this.mainService.metrics[this.type]?.values;
+        this.mainService.translateAlternatives();
+        
+      }, 10);
+    });
     this.subs.push(this.mainService.options$.subscribe(res => {
       if (res !== 'empty') {
         this.name = res.name;
+        this.type = res.type;
+        this.mainService.translateAlternatives();
+        
         this.expertName = this.mainService.votingName;
         this.metric = this.mainService.metrics[res.type].values;
         this.alternatives = res.alternatives;

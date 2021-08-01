@@ -1,6 +1,6 @@
 <div class="wrapper">
     <!-- <span>{{name}}</span> <br> -->
-    <span class="name">Eксперт {{expertName}}</span>
+    <span class="name">{{'poll.exp' | translate}} {{expertName}}</span>
 
     <div class="questions">
         <div class="question" *ngFor="let alt of alternatives; let i = index">
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="buttons">
-        <button mat-raised-button color="primary" (click)="send()">Підтвердити</button>
+        <button mat-raised-button color="primary" (click)="send()">{{'poll.submit' | translate}}</button>
         <!-- <button mat-raised-button class="warn" (click)="back()">Повернутися</button> -->
     </div>
 </div>

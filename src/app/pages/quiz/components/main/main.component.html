@@ -1,21 +1,20 @@
 <div class="wrapper" [class]="markType">
     <div class="results">
-        <h2>Назва опитування: <span class="name">{{ name }}</span></h2>
+        <h2>{{'poll.name' | translate}}: <span class="name">{{ name }}</span></h2>
 
         <div class="info">
-            <p>Код доступу: <span>{{code}}</span></p>
-            <p>Кількість опитуваних:<span> {{votes?.length || 0}}</span></p>
-            <p *ngIf="times[0]">Перша відповідь: <span>{{times[0] | date:'medium'}}</span></p>
-            <p *ngIf="times[1]">Остання відповідь: <span>{{times[1] | date:'medium'}}</span></p>
-            <p style="cursor: pointer;" (click)="copy('https://fivevvpoll.web.app/?id='+code)">Посилання на опитування:
+            <p>{{'poll.code' | translate}}: <span>{{code}}</span></p>
+            <p>{{'poll.count' | translate}}:<span> {{votes?.length || 0}}</span></p>
+            <p *ngIf="times[0]">{{'poll.firstTime' | translate}}: <span>{{times[0] | date:'short'}}</span></p>
+            <p *ngIf="times[1]">{{'poll.lastTime' | translate}}: <span>{{times[1] | date:'short'}}</span></p>
+            <p style="cursor: pointer;" (click)="copy('https://fivevvpoll.web.app/?id='+code)">{{'poll.link' | translate}}:
                 <input id="link" style="color: #10599f; cursor: pointer; text-decoration: underline; font-weight: bold;"
                     value="https://fivevvpoll.web.app/?id={{code}}" disabled></p>
         </div>
 
-        <div style="color: #072949; text-transform: uppercase; margin-top: 30px;" class="no" *ngIf="!votes?.length"> Ще
-            немає відповідей</div>
+        <div style="color: #072949; text-transform: uppercase; margin-top: 30px;" class="no" *ngIf="!votes?.length">{{'poll.no' | translate}} </div>
 
-        <h2 *ngIf="votes?.length">Результати опитування:</h2>
+        <h2 *ngIf="votes?.length">{{'poll.title' | translate}}:</h2>
 
         <div class="res-3" *ngIf="votes?.length">
             <div class="alt" *ngFor="let alt of alternatives; let i = index" 
@@ -40,8 +39,8 @@
 
 
         <div class="buttons">
-            <button mat-raised-button class="ext" (click)="extend()" *ngIf="votes?.length && !extended">{{extended ? 'Згорнути' : 'Детальніше'}}</button>
-            <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
+            <button mat-raised-button class="ext" (click)="extend()" *ngIf="votes?.length && !extended">{{'poll.next1' | translate}}</button>
+            <button mat-raised-button class="new" (click)="newExpert()">{{'poll.new' | translate}}</button>
         </div>
         
 
@@ -100,8 +99,8 @@
         </div>
 
         <div class="buttons wide" *ngIf="extended">
-            <button mat-raised-button class="ext" (click)="extend2()" *ngIf="votes?.length && !extended2">Мапа переважань</button>
-            <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
+            <button mat-raised-button class="ext" (click)="extend2()" *ngIf="votes?.length && !extended2">{{'poll.next2' | translate}}</button>
+            <button mat-raised-button class="new" (click)="newExpert()">{{'poll.new' | translate}}</button>
         </div>
 
         <br>
@@ -119,7 +118,7 @@
         </div>
 
         <div class="buttons" *ngIf="votes?.length > 20 && extended2">
-            <button mat-raised-button class="new" (click)="newExpert()">Новий експерт</button>
+            <button mat-raised-button class="new" (click)="newExpert()">{{'poll.new' | translate}}</button>
         </div>
 
     </div>

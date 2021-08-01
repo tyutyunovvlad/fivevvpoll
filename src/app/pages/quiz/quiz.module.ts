@@ -12,7 +12,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NewExpertComponent } from './components/new-expert/new-expert.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VotingPageComponent } from './components/voting-page/voting-page.component';
-import { RouterErrorComponent } from '../../shared/errors/router-error/router-error.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [QuizComponent, MainComponent, NewExpertComponent, VotingPageComponent, RouterErrorComponent],
+  declarations: [QuizComponent, MainComponent, NewExpertComponent, VotingPageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -38,6 +38,7 @@ const routes: Routes = [
     MatButtonToggleModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule
   ],
   exports: [RouterModule]
 })

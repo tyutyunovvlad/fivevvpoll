@@ -28,6 +28,8 @@ import localeUa from '@angular/common/locales/uk';
 import { CopiedComponent } from './shared/errors/copied/copied.component';
 import { AlternativesComponent } from './shared/errors/alternatives/alternatives.component';
 import {MatSelectModule} from '@angular/material/select';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterErrorComponent } from './shared/errors/router-error/router-error.component';
 
 registerLocaleData(localeUa, 'ua');
 
@@ -51,7 +53,8 @@ const firebaseConfig = {
     ConnectErrorComponent,
     CreateErrorComponent,
     CopiedComponent,
-    AlternativesComponent
+    AlternativesComponent,
+    RouterErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,9 @@ const firebaseConfig = {
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    TranslateModule.forRoot({
+      defaultLanguage: 'ua'
+    }),
 
     MatButtonModule,
     MatToolbarModule,
@@ -69,7 +75,8 @@ const firebaseConfig = {
     MatButtonToggleModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    TranslateModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'ua'}],
   bootstrap: [AppComponent]

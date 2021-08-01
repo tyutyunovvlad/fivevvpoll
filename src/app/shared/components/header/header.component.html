@@ -6,8 +6,10 @@
 
         <h1 (click)="home()">Five<span>VV</span>Poll</h1>
 
-        <mat-select value="option1">
-            <mat-option value="option1">UKR</mat-option>
+        <mat-select [value]="langu" (selectionChange)="lang($event)">
+            <mat-option value="ua">UKR</mat-option>
+            <mat-option value="ru">RUS</mat-option>
+            <mat-option value="en">ENG</mat-option>
         </mat-select>
     </mat-toolbar>
 

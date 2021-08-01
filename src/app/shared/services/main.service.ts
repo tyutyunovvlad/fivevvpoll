@@ -5,6 +5,7 @@ import { filter, map, take, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorService } from './error.service';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface IData {
   name: string;
@@ -35,11 +36,11 @@ export class MainService {
   public metrics = [
     {
       type: 'centered',
-      values: ['Дуже погано', 'Погано', 'Байдуже (Не знаю)', 'Добре', 'Дуже \n добре'],
+      values: ['Дуже погано', 'Погано', 'Байдуже (Не знаю)', 'Добре', 'Дуже добре'],
     },
     {
       type: 'centered',
-      values: ['Категорично проти', 'Проти', 'Байдуже (Утримуюсь)', 'За', 'Категорично за'],
+      values: ['Категорично проти', 'Проти', 'Байдуже (Утримався)', 'За', 'Категорично за'],
     },
     {
       type: 'ladder',
@@ -61,8 +62,9 @@ export class MainService {
     private router: Router,
     private firestore: AngularFirestore,
     private dialog: MatDialog,
-    private errorService: ErrorService
+    private translate: TranslateService
   ) {
+
 
     this.votes$.pipe(take(1)).subscribe(res => {
       if (res.length && this.optionsSubj.value !== 'empty' && this.optionsSubj.value?.id) {
@@ -70,6 +72,13 @@ export class MainService {
         this.ref.doc(this.optionsSubj.value?.id).update({ votes: res });
       }
     });
+  }
+
+  public translateAlternatives(): void {
+    
+    this.metrics[0].values = this.translate.instant('alts')[0];
+    this.metrics[1].values = this.translate.instant('alts')[1];
+    this.metrics[2].values = this.translate.instant('alts')[2];
   }
 
   public create(data: IData): void {
@@ -120,8 +129,6 @@ export class MainService {
   }
 
   public findById(id: string, callback?): void {
-    console.log(1);
-    
     this.loadingSubj.next(true);
 
     this.ref.get().pipe(take(1)).subscribe(res => {
@@ -130,8 +137,6 @@ export class MainService {
       const coll = data.find(el => el.id === id);
 
       this.loadingSubj.next(false);
-      console.log(2);
-      
       if (coll) {
         this.votesSubj.next(coll.votes);
         this.optionsSubj.next(coll);

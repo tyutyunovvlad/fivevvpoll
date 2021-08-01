@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { IData, MainService } from 'src/app/shared/services/main.service';
 
@@ -20,7 +21,13 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
   public metrics = [];
   private subs = [];
 
-  constructor(private mainService: MainService, public dialog: MatDialog, private errorService: ErrorService) {
+  constructor(
+    private mainService: MainService,
+    public dialog: MatDialog,
+    private errorService: ErrorService,
+    private translateService: TranslateService
+  ) {
+    this.mainService.translateAlternatives();
     this.metrics = this.mainService.metrics;
 
     this.form = new FormGroup({
@@ -45,8 +52,6 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     e.preventDefault();
 
     if (this.form.value.name.trim().length === 0 || this.form.value.id.trim().length === 0) {
-      console.log();
-      
       this.form.controls.name.setValue(this.form.value.name.trim());
       this.form.controls.id.setValue(this.form.value.id.trim());
       return;
@@ -63,11 +68,12 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
           votes: []
         };
 
-       
-
         this.alternativesForm = new FormGroup({});
         for (let i = 0; i < this.data.count; i++) {
-          this.alternativesForm.addControl(`${i}`, new FormControl(`Альтернатива ${i + 1}`, [Validators.required, Validators.maxLength(50)]));
+          this.alternativesForm.addControl(
+            `${i}`,
+            new FormControl(`${this.translateService.instant('home.alt')} ${i + 1}`, [Validators.required, Validators.maxLength(50)])
+          );
           this.data.alternatives.push('');
         }
       } else {

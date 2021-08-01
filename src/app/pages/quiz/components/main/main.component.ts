@@ -211,7 +211,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   public toTop() {
-    console.log(1);
     
     document.body.scroll(0,0);
   }
