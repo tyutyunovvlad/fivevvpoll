@@ -25,9 +25,23 @@ export class MainComponent implements OnInit, OnDestroy {
   private subs = [];
 
   public bars = [];
+  public math: Math = Math;
 
   public mainResults = [
 
+  ];
+
+  public res2MoreStates = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
   ];
 
   constructor(
@@ -147,9 +161,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
       arr.forEach((v, i) => {
         if (arr[i].mark > 0) {
-          arr[i].per = v.mark * 100 / max;
+          arr[i].per = Math.abs(v.mark * 100 / Math.max(max, min));
         } else if (arr[i].mark < 0) {
-          arr[i].per = v.mark * 100 / min;
+          arr[i].per = Math.abs(v.mark * 100 / Math.max(max, min));
         }
 
         if (arr[i].mark === 0) {
@@ -186,9 +200,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
       arr.forEach((v, i) => {
         if (arr[i].mark > 0) {
-          arr[i].per = v.mark * 100 / max;
+          arr[i].per = Math.abs(v.mark * 100 / Math.max(max, min));
         } else if (arr[i].mark < 0) {
-          arr[i].per = v.mark * 100 / min;
+          arr[i].per = Math.abs(v.mark * 100 / Math.max(max, min));
         }
 
         if (arr[i].mark === 0) {
@@ -207,12 +221,58 @@ export class MainComponent implements OnInit, OnDestroy {
 
 
     this.mainResults = arr;
-
   }
 
   public toTop() {
-    
-    document.body.scroll(0,0);
+
+    document.body.scroll(0, 0);
+  }
+
+  public calcZZ(marks) {
+    return ((this.getNumberOfMarks(marks, 3) + this.getNumberOfMarks(marks, 4)) / marks.length) * 100;
+  }
+  public calcZNZ(marks) {
+    return ((this.getNumberOfMarks(marks, 0) + this.getNumberOfMarks(marks, 1)) /
+      marks.length) * 100;
+  }
+
+  public calcIN(marks) {
+    return ((this.getNumberOfMarks(marks, 2)) / marks.length) * 100;
+  }
+
+  public calcPD(marks) {
+    return ((2 *
+      this.math.min(
+        (
+          (this.getNumberOfMarks(marks, 0)) +
+          (this.getNumberOfMarks(marks, 1))
+        ),
+        (
+          (this.getNumberOfMarks(marks, 3)) +
+          (this.getNumberOfMarks(marks, 4))
+        )
+      )
+    ) / marks.length) * 100;
+  }
+
+  public calcCON(marks) {
+    return ((2 *
+      this.math.min(
+          (this.getNumberOfMarks(marks, 0)),
+          (this.getNumberOfMarks(marks, 4))
+
+      )
+  ) / marks.length) * 100;
+  }
+
+  public calcLO(marks) {
+    return ((this.getNumberOfMarks(marks, 4)) / marks.length) * 100;
+  }
+  public calcALO(marks) {
+    return ((this.getNumberOfMarks(marks, 0)) / marks.length) * 100;
+  }
+  public calcPO(marks) {
+    return ((this.getNumberOfMarks(marks, 1) + this.getNumberOfMarks(marks, 2) + this.getNumberOfMarks(marks, 3)) / marks.length) * 100;
   }
 
 }

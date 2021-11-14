@@ -61,7 +61,10 @@ export class HeaderComponent implements OnInit {
         exp: 'Експерт',
         no: 'Ще немає відповідей',
         submit: 'Підтвердити',
-        message: 'Покинути опитування? Не забудьте зберегти код доступу: '
+        message: {
+          forget: 'Не забудьте зберегти код доступу: ',
+          leave: 'Покинути опитування?'
+        }
       },
       messages: {
         alts: 'Назви альтернатив повторюються',
@@ -109,7 +112,10 @@ export class HeaderComponent implements OnInit {
         exp: 'Эксперт',
         no: 'Еще нет ответов',
         submit: 'Подтвердить',
-        message: 'Выйти из опроса? Не забудьте сохранить код доступа: '
+        message: {
+          forget: 'Не забудьте сохранить код доступа: ',
+          leave: 'Выйти из опроса?'
+        }
       },
       messages: {
         alts: 'Названия альтернатив повторяются',
@@ -157,7 +163,10 @@ export class HeaderComponent implements OnInit {
         exp: 'Expert',
         no: 'There are no answers yet',
         submit: 'Confirm',
-        message: 'Leave poll? Don\'t forget to save the access code:  '
+        message: {
+          forget: 'Don\'t forget to save the access code: ',
+          leave: 'Leave poll?'
+        }
       },
       messages: {
         alts: 'Alternative names are repeated',
@@ -177,7 +186,7 @@ export class HeaderComponent implements OnInit {
 
   public home(): void {
     if (this.id) {
-      if (confirm(this.translate.instant('poll.message') + this.id)) {
+      if (confirm(this.translate.instant('poll.message.forget') + this.id + '\n' + this.translate.instant('poll.message.leave'))) {
         this.router.navigate(['home']);
       } else {
         return;
