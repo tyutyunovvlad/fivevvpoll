@@ -100,7 +100,7 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- <div class="total">
+                        <div class="total" *ngIf="res2MoreStates[i]">
                             {{
                             (getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
                             (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
@@ -108,7 +108,7 @@
                             (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
                             (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5))
                             }}
-                        </div> -->
+                        </div>
                     </div> 
 
                     <div *ngIf="res2MoreStates[i]" class="more">
