@@ -161,9 +161,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
       arr.forEach((v, i) => {
         if (arr[i].mark > 0) {
-          arr[i].per = Math.abs(v.mark * 100 / Math.max(max, min));
+          arr[i].per = Math.abs(v.mark * 100 / Math.max(Math.abs(max), Math.abs(min)));
         } else if (arr[i].mark < 0) {
-          arr[i].per = Math.abs(v.mark * 100 / Math.max(max, min));
+          arr[i].per = Math.abs(v.mark * 100 / Math.max(Math.abs(max), Math.abs(min)));
         }
 
         if (arr[i].mark === 0) {
@@ -200,9 +200,12 @@ export class MainComponent implements OnInit, OnDestroy {
 
       arr.forEach((v, i) => {
         if (arr[i].mark > 0) {
-          arr[i].per = Math.abs(v.mark * 100 / Math.max(max, min));
+          console.log(1);
+          
+          arr[i].per = Math.abs(v.mark * 100 / Math.max(Math.abs(max), Math.abs(min)));
         } else if (arr[i].mark < 0) {
-          arr[i].per = Math.abs(v.mark * 100 / Math.max(max, min));
+          console.log(v.mark, Math.max(max, min));
+          arr[i].per = Math.abs(v.mark * 100 / Math.max(Math.abs(max), Math.abs(min)));
         }
 
         if (arr[i].mark === 0) {
