@@ -100,62 +100,80 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="total" *ngIf="res2MoreStates[i]">
+                        <div class="total">
                             {{
-                            (getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
+                            ((getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
                             (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +
                             (getNumberOfMarks(bars[i].marks, 2) * (markType==='centered' ? 0 : 3)) +
                             (getNumberOfMarks(bars[i].marks, 3) * (markType==='centered' ? 1 : 4)) +
-                            (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5))
+                            (getNumberOfMarks(bars[i].marks, 4) * (markType==='centered' ? 2 : 5)))
+                            /
+                            bars[i].marks.length
+                            | number:'1.2-2'
                             }}
                         </div>
-                    </div> 
+                    </div>
 
                     <div *ngIf="res2MoreStates[i]" class="more">
-                        <p class="ZZ" *ngIf="markType === 'centered'">Загальна згода:
+                        <p class="ZZ" *ngIf="markType === 'centered'" [ngClass]="{bold: calcZZ(bars[i].marks) > 50}">
+                            {{'poll.types.ZZ' | translate}}:
                             <span>
-                                {{ calcZZ(bars[i].marks) | number:'1.2-2' }}%
+                                {{ calcZZ(bars[i].marks) }}%
                             </span>
                         </p>
-                        <p class="ZNZ" *ngIf="markType === 'centered'">Загальна незгода:
+                        <p class="ZNZ" *ngIf="markType === 'centered'" [ngClass]="{bold: calcZNZ(bars[i].marks) > 50}">
+                            {{'poll.types.ZNZ' | translate}}:
                             <span>
-                                {{calcZNZ(bars[i].marks) | number:'1.2-2'}}%
+                                {{calcZNZ(bars[i].marks) }}%
                             </span>
                         </p>
-                        <p class="IN" *ngIf="markType === 'centered'">Індиферентність:
+                        <p class="IN" *ngIf="markType === 'centered'" [ngClass]="{bold: calcIN(bars[i].marks) > 50}">
+                            {{'poll.types.IN' | translate}}:
                             <span>
-                                {{calcIN(bars[i].marks) | number:'1.2-2'}}%
+                                {{calcIN(bars[i].marks)}}%
                             </span>
                         </p>
-                        <p class="PD">Полярність думок:
+                        <p class="PD" [ngClass]="{bold: calcPD(bars[i].marks) > 50}">
+                            {{'poll.types.PD' | translate}}:
                             <span>
-                                {{ calcPD(bars[i].marks) | number:'1.2-2' }}%
+                                {{ calcPD(bars[i].marks) }}%
                             </span>
                         </p>
-                        <p class="CON" *ngIf="markType === 'centered'">Конфронтаційність:
+                        <p class="CON" *ngIf="markType === 'centered'" [ngClass]="{bold: calcCON(bars[i].marks) > 50}">
+                            {{'poll.types.CON' | translate}}:
                             <span>
-                                {{ calcCON(bars[i].marks) | number:'1.2-2' }}%
+                                {{ calcCON(bars[i].marks) }}%
                             </span>
                         </p>
-                        <p class="LO" *ngIf="markType === 'centered'">Лобізм:
+                        <p class="LO" *ngIf="markType === 'centered'" [ngClass]="{bold: calcLO(bars[i].marks) > 50}">
+                            {{'poll.types.LO' | translate}}:
                             <span>
-                                {{ calcLO(bars[i].marks) | number:'1.2-2' }}%
+                                {{ calcLO(bars[i].marks) }}%
                             </span>
                         </p>
-                        <p class="ALO" *ngIf="markType === 'centered'">Антилобізм:
+                        <p class="ALO" *ngIf="markType === 'centered'" [ngClass]="{bold: calcALO(bars[i].marks) > 50}">
+                            {{'poll.types.ALO' | translate}}:
                             <span>
-                                {{ calcALO(bars[i].marks) | number:'1.2-2' }}%
+                                {{ calcALO(bars[i].marks) }}%
                             </span>
                         </p>
-                        <p class="PO">Поміркованість:
+                        <p class="PO" [ngClass]="{bold: calcPO(bars[i].marks) > 50}">
+                            {{'poll.types.PO' | translate}}:
                             <span>
-                                {{ calcPO(bars[i].marks) | number:'1.2-2' }}%
+                                {{ calcPO(bars[i].marks) }}%
+                            </span>
+                        </p>
+                        <p class="OS" [ngClass]="{bold: calcOS(bars[i].marks) > 50}">
+                            {{'poll.types.OS' | translate}}:
+                            <span>
+                                {{ calcOS(bars[i].marks) }}%
                             </span>
                         </p>
                     </div>
-                    <button mat-button color="primary" class="more-button" (click)="res2MoreStates[i] = !res2MoreStates[i]">
+                    <button mat-button color="primary" class="more-button"
+                        (click)="res2MoreStates[i] = !res2MoreStates[i]">
                         {{
-                            res2MoreStates[i] ? 'Згорнути' : 'Детальніше'
+                        (res2MoreStates[i] ? 'poll.hide' : 'poll.more') | translate
                         }}
                     </button>
                 </div>

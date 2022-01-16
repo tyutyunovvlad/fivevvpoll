@@ -102,12 +102,12 @@ export class MainService {
       votes.forEach(el => {
 
 
-        if (el.name === `${vote.name}${i ? ' / ' + i : ''}`) {
+        if (el.name === `${vote.name}${i ? ' (' + i + ')' : ''}`) {
           i++;
         }
       });
       if (i > 0) {
-        vote.name += ' / ' + i;
+        vote.name += ' (' + i + ')';
       }
 
       votes.push(vote);

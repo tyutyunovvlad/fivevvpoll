@@ -64,6 +64,19 @@ export class HeaderComponent implements OnInit {
         message: {
           forget: 'Не забудьте зберегти код доступу: ',
           leave: 'Покинути опитування?'
+        },
+        more: 'Детальніше',
+        hide: 'Згорнути',
+        types: {
+          ZZ: 'Загальна згода',
+          ZNZ: 'Загальна незгода',
+          IN: 'Індиферентність',
+          PD: 'Полярність думок',
+          CON: 'Конфронтаційність',
+          LO: 'Лобізм',
+          ALO: 'Антилобізм',
+          PO: 'Поміркованість',
+          OS: 'Одностайність',
         }
       },
       messages: {
@@ -115,6 +128,19 @@ export class HeaderComponent implements OnInit {
         message: {
           forget: 'Не забудьте сохранить код доступа: ',
           leave: 'Выйти из опроса?'
+        },
+        more: 'Подробнее',
+        hide: 'Свернуть',
+        types: {
+          ZZ: 'Общее согласие',
+          ZNZ: 'Общее несогласие',
+          IN: 'Индифферентность',
+          PD: 'Полярность мнений',
+          CON: 'Конфронтационность',
+          LO: 'Лоббизм',
+          ALO: 'Антилоббизм',
+          PO: 'Умеренность',
+          OS: 'Единогласие',
         }
       },
       messages: {
@@ -166,6 +192,19 @@ export class HeaderComponent implements OnInit {
         message: {
           forget: 'Don\'t forget to save the access code: ',
           leave: 'Leave poll?'
+        },
+        more: 'More',
+        hide: 'Hide',
+        types: {
+          ZZ: 'General agreement',
+          ZNZ: 'General disagreement',
+          IN: 'Indifference',
+          PD: 'Polarity of opinions',
+          CON: 'Confrontation',
+          LO: 'Lobbying',
+          ALO: 'Anti-lobbying',
+          PO: 'Moderation',
+          OS: 'Unanimity'
         }
       },
       messages: {

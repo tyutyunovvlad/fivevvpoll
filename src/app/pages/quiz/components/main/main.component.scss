@@ -218,6 +218,10 @@
 
                 p {
                     margin: 3px;
+
+                    &.bold {
+                        font-weight: bold;
+                    }
                 }
             }
         }
@@ -262,23 +266,29 @@
         }
 
         .res-2 {
-            .alt {
+            .result__2 {
                 width: 100%;
-                .bar {
-                    min-width: unset;
+                .alt {
                     width: 100%;
+                    .bar {
+                        min-width: unset;
+                        width: 100%;
+                    }
                 }
             }
         }
 
         .res-3 {
-            .alt {
-                width: 50%;
-                .span {
-                    width: 100%;
-                }
-                .bar {
-                    width: 100%;
+            .result__1 {
+                width: 100%;
+                .alt {
+                    width: 50%;
+                    .span {
+                        width: 100%;
+                    }
+                    .bar {
+                        width: 100%;
+                    }
                 }
             }
         }

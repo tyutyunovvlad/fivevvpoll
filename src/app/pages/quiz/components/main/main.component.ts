@@ -232,19 +232,19 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   public calcZZ(marks) {
-    return ((this.getNumberOfMarks(marks, 3) + this.getNumberOfMarks(marks, 4)) / marks.length) * 100;
+    return Math.round(((this.getNumberOfMarks(marks, 3) + this.getNumberOfMarks(marks, 4)) / marks.length) * 100);
   }
   public calcZNZ(marks) {
-    return ((this.getNumberOfMarks(marks, 0) + this.getNumberOfMarks(marks, 1)) /
-      marks.length) * 100;
+    return Math.round(((this.getNumberOfMarks(marks, 0) + this.getNumberOfMarks(marks, 1)) /
+    marks.length) * 100);
   }
 
   public calcIN(marks) {
-    return ((this.getNumberOfMarks(marks, 2)) / marks.length) * 100;
+    return Math.round(((this.getNumberOfMarks(marks, 2)) / marks.length) * 100);
   }
 
   public calcPD(marks) {
-    return ((2 *
+    return Math.round(((2 *
       this.math.min(
         (
           (this.getNumberOfMarks(marks, 0)) +
@@ -255,27 +255,36 @@ export class MainComponent implements OnInit, OnDestroy {
           (this.getNumberOfMarks(marks, 4))
         )
       )
-    ) / marks.length) * 100;
+    ) / marks.length) * 100);
   }
 
   public calcCON(marks) {
-    return ((2 *
+    return Math.round(((2 *
       this.math.min(
           (this.getNumberOfMarks(marks, 0)),
           (this.getNumberOfMarks(marks, 4))
 
       )
-  ) / marks.length) * 100;
+  ) / marks.length) * 100);
   }
 
   public calcLO(marks) {
-    return ((this.getNumberOfMarks(marks, 4)) / marks.length) * 100;
+    return Math.round(((this.getNumberOfMarks(marks, 4)) / marks.length) * 100);
   }
   public calcALO(marks) {
-    return ((this.getNumberOfMarks(marks, 0)) / marks.length) * 100;
+    return Math.round(((this.getNumberOfMarks(marks, 0)) / marks.length) * 100);
   }
   public calcPO(marks) {
-    return ((this.getNumberOfMarks(marks, 1) + this.getNumberOfMarks(marks, 2) + this.getNumberOfMarks(marks, 3)) / marks.length) * 100;
+    return Math.round(((this.getNumberOfMarks(marks, 1) + this.getNumberOfMarks(marks, 2) + this.getNumberOfMarks(marks, 3)) / marks.length) * 100);
+  }
+
+  public calcOS(marks) {
+    if (this.markType === 'ladder') {
+      return Math.round(((Math.max(this.getNumberOfMarks(marks, 0), this.getNumberOfMarks(marks, 1), this.getNumberOfMarks(marks, 2), this.getNumberOfMarks(marks, 3), this.getNumberOfMarks(marks, 4))) / marks.length) * 100);
+    } else if (this.markType === 'centered') {
+      return Math.round(((Math.abs(this.getNumberOfMarks(marks, 0) + this.getNumberOfMarks(marks, 1) - this.getNumberOfMarks(marks, 3) - this.getNumberOfMarks(marks, 4))) / marks.length) * 100);
+    }
+    return 0;
   }
 
 }
