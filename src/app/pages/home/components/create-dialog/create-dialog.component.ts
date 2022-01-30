@@ -31,7 +31,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     private translateService: TranslateService
   ) {
     this.mainService.translateAlternatives();
-    this.metrics = this.mainService.metrics;
+    this.metrics = this.mainService.defaultMetrics;
 
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -69,6 +69,9 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
           type: this.selectedMetric,
           alternatives: [],
           votes: [],
+          customMetric: {
+            ...this.customMetricValue
+          }
         };
 
         this.alternativesForm = new FormGroup({});

@@ -14,6 +14,7 @@ export interface IData {
   type: number;
   alternatives: Array<string>;
   votes?: Array<IVote>;
+  customMetric?: any;
 }
 
 export interface IVote {
@@ -33,7 +34,7 @@ export class MainService {
   private loadingSubj = new BehaviorSubject(false);
   public loading$ = this.loadingSubj.asObservable();
 
-  public metrics = [
+  public defaultMetrics = [
     {
       type: 'centered',
       values: ['Категорично проти', 'Проти', 'Байдуже (Утримався)', 'За', 'Категорично за'],
@@ -43,6 +44,8 @@ export class MainService {
       values: ['1', '2', '3', '4', '5']
     }
   ];
+
+  public metrics = [];
 
   private votesSubj = new BehaviorSubject<Array<IVote>>([]);
   public votes$ = this.votesSubj.asObservable().pipe(filter(r => !!r));
@@ -61,6 +64,7 @@ export class MainService {
     private translate: TranslateService
   ) {
 
+    this.metrics = [...this.defaultMetrics];
 
     this.votes$.pipe(take(1)).subscribe(res => {
       if (res.length && this.optionsSubj.value !== 'empty' && this.optionsSubj.value?.id) {
@@ -168,5 +172,12 @@ export class MainService {
 
   public secret(): void {
     this.adminSubj.next(true);
+  }
+
+  public setCustomMetric(customMetric): void {
+    this.metrics[100] = {
+      type: customMetric.type,
+      values: customMetric.value
+    };
   }
 }

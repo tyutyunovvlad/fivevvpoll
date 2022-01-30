@@ -60,36 +60,42 @@ export class MainComponent implements OnInit, OnDestroy {
 
     this.subs.push(this.mainService.options$.subscribe(res => {
 
-      if (res !== 'empty') {
-        this.name = res.name;
-        this.alternatives = res.alternatives;
-        this.markType = this.mainService.metrics[res.type].type;
-        this.code = res.id;
-
-        this.subs.push(this.mainService.votes$.subscribe(res => {
-
-          this.bars = [];
-
-          this.votes = res;
-          this.times[0] = res[0]?.time;
-          this.times[1] = res[res.length - 1]?.time;
-          this.alternatives.forEach((alt, i) => {
-            this.bars.push({ i, marks: [] });
-
-            this.votes.forEach((vote, j) => {
-              this.bars[i].marks.push(vote.votes[i]);
-            });
-            this.bars[i].marks.sort();
-
-
-          });
-          this.generateMain();
-        }));
-
-      } else {
+      if (res === 'empty') {
         this.errorService.showRouteError();
         this.router.navigate(['home']);
+        return;
       }
+
+      console.log(res);
+      if (res.type === 100) {
+        this.mainService.setCustomMetric(res.customMetric);
+      }
+      
+
+      this.name = res.name;
+      this.alternatives = res.alternatives;
+      this.markType = this.mainService.metrics[res.type].type;
+      this.code = res.id;
+
+      this.subs.push(this.mainService.votes$.subscribe(res => {
+
+        this.bars = [];
+
+        this.votes = res;
+        this.times[0] = res[0]?.time;
+        this.times[1] = res[res.length - 1]?.time;
+        this.alternatives.forEach((alt, i) => {
+          this.bars.push({ i, marks: [] });
+
+          this.votes.forEach((vote, j) => {
+            this.bars[i].marks.push(vote.votes[i]);
+          });
+          this.bars[i].marks.sort();
+
+
+        });
+        this.generateMain();
+      }));
     }));
 
   }
@@ -201,7 +207,7 @@ export class MainComponent implements OnInit, OnDestroy {
       arr.forEach((v, i) => {
         if (arr[i].mark > 0) {
           console.log(1);
-          
+
           arr[i].per = Math.abs(v.mark * 100 / Math.max(Math.abs(max), Math.abs(min)));
         } else if (arr[i].mark < 0) {
           console.log(v.mark, Math.max(max, min));
@@ -236,7 +242,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
   public calcZNZ(marks) {
     return Math.round(((this.getNumberOfMarks(marks, 0) + this.getNumberOfMarks(marks, 1)) /
-    marks.length) * 100);
+      marks.length) * 100);
   }
 
   public calcIN(marks) {
@@ -261,11 +267,11 @@ export class MainComponent implements OnInit, OnDestroy {
   public calcCON(marks) {
     return Math.round(((2 *
       this.math.min(
-          (this.getNumberOfMarks(marks, 0)),
-          (this.getNumberOfMarks(marks, 4))
+        (this.getNumberOfMarks(marks, 0)),
+        (this.getNumberOfMarks(marks, 4))
 
       )
-  ) / marks.length) * 100);
+    ) / marks.length) * 100);
   }
 
   public calcLO(marks) {
