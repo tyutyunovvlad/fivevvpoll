@@ -45,6 +45,13 @@ export class MainService {
     }
   ];
 
+  public deletedMetrics = [
+    {
+      type: 'centered',
+      values: ['Дуже погано', 'Погано', 'Байдуже (Не знаю)', 'Добре', 'Дуже добре'],
+    }
+  ];
+
   public metrics = [];
 
   private votesSubj = new BehaviorSubject<Array<IVote>>([]);
@@ -64,7 +71,7 @@ export class MainService {
     private translate: TranslateService
   ) {
 
-    this.metrics = [...this.defaultMetrics];
+    this.metrics = [...this.defaultMetrics, ...this.deletedMetrics];
 
     this.votes$.pipe(take(1)).subscribe(res => {
       if (res.length && this.optionsSubj.value !== 'empty' && this.optionsSubj.value?.id) {
