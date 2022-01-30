@@ -31,6 +31,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterErrorComponent } from './shared/errors/router-error/router-error.component';
 
+import {MatRadioModule} from '@angular/material/radio';
+
 registerLocaleData(localeUa, 'ua');
 
 
@@ -76,6 +78,7 @@ const firebaseConfig = {
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatRadioModule,
     TranslateModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'ua'}],

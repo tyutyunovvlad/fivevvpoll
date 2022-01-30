@@ -36,10 +36,6 @@ export class MainService {
   public metrics = [
     {
       type: 'centered',
-      values: ['Дуже погано', 'Погано', 'Байдуже (Не знаю)', 'Добре', 'Дуже добре'],
-    },
-    {
-      type: 'centered',
       values: ['Категорично проти', 'Проти', 'Байдуже (Утримався)', 'За', 'Категорично за'],
     },
     {
@@ -78,7 +74,7 @@ export class MainService {
     
     this.metrics[0].values = this.translate.instant('alts')[0];
     this.metrics[1].values = this.translate.instant('alts')[1];
-    this.metrics[2].values = this.translate.instant('alts')[2];
+    // this.metrics[2].values = this.translate.instant('alts')[2];
   }
 
   public create(data: IData): void {

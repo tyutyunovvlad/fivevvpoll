@@ -40,7 +40,6 @@ export class HeaderComponent implements OnInit {
         connect: 'Приєднатись'
       },
       alts: [
-        ['Дуже погано', 'Погано', 'Байдуже (Не знаю)', 'Добре', 'Дуже добре'],
         ['Категорично проти', 'Проти', 'Байдуже (Утримався)', 'За', 'Категорично \n за'],
         ['1', '2', '3', '4', '5']
       ],
@@ -104,7 +103,6 @@ export class HeaderComponent implements OnInit {
         connect: 'Присоединиться',
       },
       alts: [
-        [ 'Очень плохо', 'Плохо', 'Все равно (Не знаю)', ' Хорошо', 'Очень хорошо'],
         [ 'Категорически против', 'Против', 'Все равно (Воздержался)', 'За', 'Категорически за'],
         [ '1', '2', '3', '4', '5']
       ],
@@ -168,7 +166,6 @@ export class HeaderComponent implements OnInit {
         connect: 'Join'
       },
       alts: [
-        ['Very bad', 'Bad', 'Indifferent (Don\'t know)', 'Good', 'Very good'],
         ['Strongly against', 'Against', 'Indifferent (Abstain)', 'For', 'Strongly for'],
         ['1', '2', '3', '4', '5']
       ],

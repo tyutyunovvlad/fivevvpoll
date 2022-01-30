@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorService } from 'src/app/shared/services/error.service';
@@ -15,11 +15,14 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
 
   public form: FormGroup;
   public alternativesForm: FormGroup | undefined;
+  public customMetricForm: FormGroup | undefined;
   public data: IData | undefined;
 
   public selectedMetric = -1;
   public metrics = [];
   private subs = [];
+
+  public customMetricValue;
 
   constructor(
     private mainService: MainService,
@@ -65,7 +68,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
           id: this.form.value.id.trim(),
           type: this.selectedMetric,
           alternatives: [],
-          votes: []
+          votes: [],
         };
 
         this.alternativesForm = new FormGroup({});
@@ -138,5 +141,31 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
         }
       }
     }
+  }
+
+  public createCustomMetric(): void {
+    this.customMetricForm = new FormGroup({
+      type: new FormControl(this.customMetricValue?.type || '', Validators.required),
+      value: new FormArray([
+        new FormControl(this.customMetricValue?.value[0] || '', Validators.required),
+        new FormControl(this.customMetricValue?.value[1] || '', Validators.required),
+        new FormControl(this.customMetricValue?.value[2] || '', Validators.required),
+        new FormControl(this.customMetricValue?.value[3] || '', Validators.required),
+        new FormControl(this.customMetricValue?.value[4] || '', Validators.required),
+      ])
+    });
+  }
+
+  public submitCustomMetric(): void {
+    if (this.customMetricForm.invalid) {
+      return;
+    }
+    this.customMetricValue = this.customMetricForm.value;
+    this.selectedMetric = 100;
+    this.customMetricForm = null;
+  }
+
+  public back(): void {
+    this.customMetricForm = null;
   }
 }
