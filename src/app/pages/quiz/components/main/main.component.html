@@ -50,6 +50,20 @@
 
 
         <div class="res-2" *ngIf="votes?.length && extended">
+
+            <div class="config-type">
+                <span class="title">Шкала оцінювання:</span>
+                <div class="table" [class]="metricData.type">
+                    <div class="row" *ngFor="let value of metricData.values; let i = index;">
+                        <div class="color" [class]="'color-' + i"></div>
+                        <div class="number">
+                            {{metricData.type === 'ladder' ? i + 1 : i - 2}}
+                        </div>
+                        <div class="value" *ngIf="+value !== +(metricData.type === 'ladder' ? i + 1 : i - 2)">{{value}}</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="result__2">
                 <div class="alt" *ngFor="let alt of alternatives; let i = index" [style]="'order:'+((getNumberOfMarks(bars[i].marks, 0) * (markType==='centered' ? -2 : 1)) +
                             (getNumberOfMarks(bars[i].marks, 1) * (markType==='centered' ? -1 : 2)) +

@@ -148,13 +148,13 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
 
   public createCustomMetric(): void {
     this.customMetricForm = new FormGroup({
-      type: new FormControl(this.customMetricValue?.type || '', Validators.required),
+      type: new FormControl(this.customMetricValue?.type || 'centered', Validators.required),
       value: new FormArray([
-        new FormControl(this.customMetricValue?.value[0] || '', Validators.required),
-        new FormControl(this.customMetricValue?.value[1] || '', Validators.required),
-        new FormControl(this.customMetricValue?.value[2] || '', Validators.required),
-        new FormControl(this.customMetricValue?.value[3] || '', Validators.required),
-        new FormControl(this.customMetricValue?.value[4] || '', Validators.required),
+        new FormControl(this.customMetricValue?.value[0] || '', [Validators.required, Validators.maxLength(20)]),
+        new FormControl(this.customMetricValue?.value[1] || '', [Validators.required, Validators.maxLength(20)]),
+        new FormControl(this.customMetricValue?.value[2] || '', [Validators.required, Validators.maxLength(20)]),
+        new FormControl(this.customMetricValue?.value[3] || '', [Validators.required, Validators.maxLength(20)]),
+        new FormControl(this.customMetricValue?.value[4] || '', [Validators.required, Validators.maxLength(20)]),
       ])
     });
   }
@@ -163,6 +163,10 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     if (this.customMetricForm.invalid) {
       return;
     }
+    (this.customMetricForm.controls.value as FormArray).controls.forEach(el => {
+      console.log(el);
+      el.setValue(el.value.trim());
+    });
     this.customMetricValue = this.customMetricForm.value;
     this.selectedMetric = 100;
     this.customMetricForm = null;

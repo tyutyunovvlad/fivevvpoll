@@ -44,6 +44,8 @@ export class MainComponent implements OnInit, OnDestroy {
     false,
   ];
 
+  public metricData;
+
   constructor(
     private dialog: MatDialog,
     private mainService: MainService,
@@ -75,6 +77,7 @@ export class MainComponent implements OnInit, OnDestroy {
       this.name = res.name;
       this.alternatives = res.alternatives;
       this.markType = this.mainService.metrics[res.type].type;
+      this.metricData = this.mainService.metrics[res.type];
       this.code = res.id;
 
       this.subs.push(this.mainService.votes$.subscribe(res => {

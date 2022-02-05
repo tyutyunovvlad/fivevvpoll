@@ -19,8 +19,10 @@
         <mat-label>{{'home.altsNum' | translate}} (1-10)</mat-label>
         <input formControlName="count" matInput type="number" autocomplete="off" min="1" max="10">
     </mat-form-field>
-    <p class="metrics-select">
-        {{'home.typeName' | translate}}:
+    <div class="metrics-select">
+        <span class="title">
+            {{'home.typeName' | translate}}:
+        </span>
         <mat-button-toggle-group [(ngModel)]="selectedMetric" name="fontStyle" aria-label="Font Style"
             [ngModelOptions]="{standalone: true}">
             <mat-button-toggle class="variant" *ngFor="let type of metrics; let i = index" [value]="i">
@@ -31,7 +33,7 @@
             </mat-button-toggle>
 
         </mat-button-toggle-group>
-    </p>
+    </div>
     <button mat-button color="primary" (click)="onSubmit($event)" type="submit"
         [disabled]="form.invalid || selectedMetric < 0"> {{'home.next' | translate}} </button>
     <button class="close-button" mat-button matSuffix mat-icon-button (click)="close()">
@@ -68,20 +70,20 @@
         <label>
             Введіть назви градацій
         </label>
-        <div class="inputs">
-            <div class="input" formArrayName="value"
-                *ngFor="let item of customMetricForm.controls.value['controls']; let i = index">
-                <mat-form-field appearance="outline">
-                    <input type="text" autocomplete="off" matInput
-                        [placeholder]="i + (customMetricForm.controls.type.value === 'centered' ? -2 : 1) + ''"
-                        [formControlName]="i">
-                </mat-form-field>
-
+        <div class="table" [class]="customMetricForm.controls.type.value">
+            <div class="row" formArrayName="value" *ngFor="let item of customMetricForm.controls.value['controls']; let i = index">
+                <div class="color" [class]="'color-' + i"></div>
+                <div class="number">
+                    {{customMetricForm.controls.type.value === 'ladder' ? i + 1 : i - 2}}
+                </div>
+                <div class="value">
+                    <input type="text" autocomplete="off" maxlength="20" [formControlName]="i" placeholder="Введіть назву градації">
+                </div>
             </div>
         </div>
     </div>
 
-    <button mat-button color="primary" type="submit">Прийняти</button>
+    <button mat-button color="primary" type="submit">Далі</button>
 </form>
 
 

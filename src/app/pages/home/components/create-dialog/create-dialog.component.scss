@@ -19,11 +19,11 @@ input[type="number"]::-webkit-inner-spin-button {
 
         &.alt-count {
             ::ng-deep .mat-form-field-underline {
-                width: 50px;
+                // width: 50px;
             }
 
             input {
-                width: 50px;
+                // width: 50px;
             }
         }
     }
@@ -33,12 +33,20 @@ input[type="number"]::-webkit-inner-spin-button {
         flex-direction: column;
         width: 100%;
 
+        .title {
+            font-weight: bold;
+        }
+
         .mat-button-toggle-group {
             display: flex;
             flex-direction: column;
 
             .mat-button-toggle {
                 border: none;
+
+                &.custom {
+                    font-style: italic;
+                }
 
                 .mat-button-toggle-label-content {
                     display: flex;
@@ -154,17 +162,71 @@ input[type="number"]::-webkit-inner-spin-button {
     }
 
     .second-question {
-        .inputs {
+
+        .table {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column-reverse;
             gap: 5px;
+            margin-bottom: 10px;
 
-            .input {
-                width: 180px;
+            &.centered {
+                .color {
+                    &-0 {
+                        background: #ff0000;
+                    }
+                    &-1 {
+                        background: #ffb9b9;
+                    }
+                    &-2 {
+                        background: #ffff00;
+                    }
+                    &-3 {
+                        background: #b6df89;
+                    }
+                    &-4 {
+                        background: #00b050;
+                    }
+                }
+            }
+            &.ladder {
+                .color {
+                    &-0 {
+                        background: #e7f0f9;
+                    }
+                    &-1 {
+                        background: #bfd6ef;
+                    }
+                    &-2 {
+                        background: #80adde;
+                    }
+                    &-3 {
+                        background: #3175bf;
+                    }
+                    &-4 {
+                        background: #25578f;
+                    }
+                }
+            }
 
-                mat-form-field {
-                    width: 100%;
+            .row {
+                display: flex;
+                align-items: center;
+                gap: 25px;
+
+                .color {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                .number {
+                    width: 15px;
+                    text-align: center;
+                }
+
+                .value {
+                    input {
+                        padding: 3px 5px;
+                    }
                 }
             }
         }
