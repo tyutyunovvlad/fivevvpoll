@@ -13,6 +13,9 @@ import { IData, MainService } from 'src/app/shared/services/main.service';
 })
 export class CreateDialogComponent implements AfterViewInit, OnDestroy {
 
+
+  public selectedPage = 0;
+
   public form: FormGroup;
   public alternativesForm: FormGroup | undefined;
   public customMetricForm: FormGroup | undefined;
@@ -51,14 +54,24 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  public openMetricSelectPage(e): void {
+    e.preventDefault();
+    this.selectedPage = 1;
+  }
+
   public onSubmit(e): void {
     e.preventDefault();
-
+    
     if (this.form.value.name.trim().length === 0 || this.form.value.id.trim().length === 0) {
       this.form.controls.name.setValue(this.form.value.name.trim());
       this.form.controls.id.setValue(this.form.value.id.trim());
       return;
     }
+
+    if (this.selectedMetric === 100 && this.customMetricForm?.invalid) {
+      return;
+    }
+    
 
     this.subs.push(this.mainService.checkIfExist(this.form.value.id.trim()).subscribe(exist => {
       if (!exist) {
@@ -84,9 +97,11 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
         }
       } else {
         this.errorService.showCreateError();
+        this.selectedPage = 0;
       }
     }));
 
+      this.selectedPage = 3;
 
   }
 
@@ -147,6 +162,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
   }
 
   public createCustomMetric(): void {
+    
     this.customMetricForm = new FormGroup({
       type: new FormControl(this.customMetricValue?.type || 'centered', Validators.required),
       value: new FormArray([
@@ -157,12 +173,14 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
         new FormControl(this.customMetricValue?.value[4] || '', [Validators.required, Validators.maxLength(20)]),
       ])
     });
+    this.selectedPage = 2;
   }
 
   public submitCustomMetric(): void {
     if (this.customMetricForm.invalid) {
       return;
     }
+    this.selectedPage = 1;
     (this.customMetricForm.controls.value as FormArray).controls.forEach(el => {
       console.log(el);
       el.setValue(el.value.trim());
@@ -172,7 +190,7 @@ export class CreateDialogComponent implements AfterViewInit, OnDestroy {
     this.customMetricForm = null;
   }
 
-  public back(): void {
-    this.customMetricForm = null;
+  public back(index): void {
+    this.selectedPage = index;
   }
 }

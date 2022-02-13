@@ -1,4 +1,4 @@
-<form class="form" [formGroup]="form" *ngIf="!alternativesForm && !customMetricForm">
+<form class="form" [formGroup]="form" *ngIf="selectedPage === 0">
 
     <h3>{{'home.newTitle' | translate}}</h3>
     <mat-form-field class="field">
@@ -19,6 +19,32 @@
         <mat-label>{{'home.altsNum' | translate}} (1-10)</mat-label>
         <input formControlName="count" matInput type="number" autocomplete="off" min="1" max="10">
     </mat-form-field>
+    <!-- <div class="metrics-select">
+        <span class="title">
+            {{'home.typeName' | translate}}:
+        </span>
+        <mat-button-toggle-group [(ngModel)]="selectedMetric" name="fontStyle" aria-label="Font Style"
+            [ngModelOptions]="{standalone: true}">
+            <mat-button-toggle class="variant" *ngFor="let type of metrics; let i = index" [value]="i">
+                <span *ngFor="let el of type.values">{{el}}</span>
+            </mat-button-toggle>
+            <mat-button-toggle [value]="100" class="variant custom" (click)="createCustomMetric()">
+                <span>{{'home.config.title' | translate}}</span>
+            </mat-button-toggle>
+
+        </mat-button-toggle-group>
+    </div> -->
+    <button mat-button color="primary" (click)="openMetricSelectPage($event)" type="submit"
+        [disabled]="form.invalid"> {{'home.next' | translate}} </button>
+    <button class="close-button" mat-button matSuffix mat-icon-button (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</form>
+
+<div class="form metric-select-wrapper" *ngIf="selectedPage === 1">
+    <button mat-mini-fab class="back" (click)="back(0)">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
     <div class="metrics-select">
         <span class="title">
             {{'home.typeName' | translate}}:
@@ -35,14 +61,11 @@
         </mat-button-toggle-group>
     </div>
     <button mat-button color="primary" (click)="onSubmit($event)" type="submit"
-        [disabled]="form.invalid || selectedMetric < 0"> {{'home.next' | translate}} </button>
-    <button class="close-button" mat-button matSuffix mat-icon-button (click)="close()">
-        <mat-icon>close</mat-icon>
-    </button>
-</form>
+        [disabled]="selectedMetric < 0"> {{'home.next' | translate}} </button>
+</div>
 
-<form class="customMetric" [formGroup]="customMetricForm" *ngIf="customMetricForm" (ngSubmit)="submitCustomMetric()">
-    <button mat-mini-fab class="back" (click)="back()">
+<form class="customMetric form" [formGroup]="customMetricForm" *ngIf="selectedPage === 2" (ngSubmit)="submitCustomMetric()">
+    <button mat-mini-fab class="back" (click)="back(1)">
         <mat-icon>arrow_back</mat-icon>
     </button>
     <h3> {{'home.config.title' | translate}} </h3>
@@ -87,7 +110,10 @@
 </form>
 
 
-<form class="alternatives" [formGroup]="alternativesForm" *ngIf="alternativesForm" (ngSubmit)="onSubmitAlternatives()">
+<form class="alternatives form" [formGroup]="alternativesForm" *ngIf="selectedPage === 3 && alternativesForm" (ngSubmit)="onSubmitAlternatives()">
+    <button mat-mini-fab class="back" (click)="back(1)">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
     <h3>{{'home.altsName' | translate}}</h3>
     <div class="inputs">
         <mat-form-field class="field ng-dirty ng-touched" *ngFor="let alt of data?.alternatives; let i = index">

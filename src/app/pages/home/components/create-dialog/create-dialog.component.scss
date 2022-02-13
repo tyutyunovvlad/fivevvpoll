@@ -3,10 +3,24 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .form {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 550px;
+    padding-top: 10px;
+
+    h3 {
+        margin-top: 0px;
+    }
+
+    .back {
+        position: absolute;
+        top: -25px;
+        left: -15px;
+        background: none;
+        box-shadow: none;
+    }
 
     .close-button {
         position: absolute;
@@ -34,6 +48,7 @@ input[type="number"]::-webkit-inner-spin-button {
         width: 100%;
 
         .title {
+            margin-bottom: 16px;
             font-weight: bold;
         }
 
@@ -94,13 +109,7 @@ input[type="number"]::-webkit-inner-spin-button {
     position: relative;
     width: 550px;
 
-    .back {
-        position: absolute;
-        top: -40px;
-        left: -15px;
-        background: none;
-        box-shadow: none;
-    }
+    
 
     .first-question {
         display: flex;
