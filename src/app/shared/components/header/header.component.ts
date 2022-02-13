@@ -37,7 +37,14 @@ export class HeaderComponent implements OnInit {
         altsName: 'Введіть назви альтернатив',
         alt: 'Альтернатива',
         findTitle: 'Приєднатись до опитування',
-        connect: 'Приєднатись'
+        connect: 'Приєднатись',
+        config: {
+          title: 'Власна шкала',
+          selectColors: 'Оберіть бально-кольорову структуру',
+          selectNames: 'Введіть назви градацій',
+          selectOneName: 'Введіть назву градації',
+          next: 'Далі'
+        }
       },
       alts: [
         ['Категорично проти', 'Проти', 'Байдуже (Утримався)', 'За', 'Категорично \n за'],
@@ -51,6 +58,7 @@ export class HeaderComponent implements OnInit {
         lastTime: 'Остання відповідь',
         link: 'Посилання на опитування',
         title: 'Результати опитування',
+        configType: 'Шкала оцінювання',
         next1: 'Детальніше',
         next2: 'Мапа переважань',
         new: 'Новий експерт',
@@ -101,6 +109,13 @@ export class HeaderComponent implements OnInit {
         alt: 'Альтернатива',
         findTitle: 'Присоединиться к опросу',
         connect: 'Присоединиться',
+        config: {
+          title: 'Новая шкала',
+          selectColors: 'Выберите балльно-цветную структуру',
+          selectNames: 'Введите названия градаций',
+          selectOneName: 'Введите названия градации',
+          next: 'Далее'
+        }
       },
       alts: [
         [ 'Категорически против', 'Против', 'Все равно (Воздержался)', 'За', 'Категорически за'],
@@ -114,6 +129,7 @@ export class HeaderComponent implements OnInit {
         lastTime: 'Последний ответ',
         link: 'Ссылка на опрос',
         title: 'Результаты опроса',
+        configType: 'Шкала оценивания',
         next1: 'Подробнее',
         next2: 'Карта Предпочтений',
         new: 'Новый эксперт',
@@ -163,7 +179,14 @@ export class HeaderComponent implements OnInit {
         altsName: 'Enter alternative names',
         alt: 'Alternative',
         findTitle: 'Join poll',
-        connect: 'Join'
+        connect: 'Join',
+        config: {
+          title: 'New scale',
+          selectColors: 'Choose a point-and-color structure',
+          selectNames: 'Enter the names of the gradations',
+          selectOneName: 'Enter the names of the gradation',
+          next: 'Next'
+        }
       },
       alts: [
         ['Strongly against', 'Against', 'Indifferent (Abstain)', 'For', 'Strongly for'],
@@ -177,6 +200,7 @@ export class HeaderComponent implements OnInit {
         lastTime: 'Last answer',
         link: 'Poll link',
         title: 'Poll results',
+        configType: 'Rating scale',
         next1: 'Details',
         next2: 'Preferences Map',
         new: 'New Expert',

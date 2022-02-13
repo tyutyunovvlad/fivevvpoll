@@ -29,7 +29,7 @@
                 <span *ngFor="let el of type.values">{{el}}</span>
             </mat-button-toggle>
             <mat-button-toggle [value]="100" class="variant custom" (click)="createCustomMetric()">
-                <span>Власна шкала</span>
+                <span>{{'home.config.title' | translate}}</span>
             </mat-button-toggle>
 
         </mat-button-toggle-group>
@@ -45,9 +45,9 @@
     <button mat-mini-fab class="back" (click)="back()">
         <mat-icon>arrow_back</mat-icon>
     </button>
-    <h3> Власна шкала </h3>
+    <h3> {{'home.config.title' | translate}} </h3>
     <div class="first-question">
-        <label id="typeLabel">Оберіть бально-кольорову структуру:</label>
+        <label id="typeLabel">{{'home.config.selectColors' | translate}}:</label>
         <mat-radio-group aria-labelledby="typeLabel" class="typeGroup" formControlName="type">
             <mat-radio-button class="typeItem centered" value="centered">
                 <span class="c-1">-2</span>
@@ -68,7 +68,7 @@
 
     <div class="second-question">
         <label>
-            Введіть назви градацій
+            {{'home.config.selectNames' | translate}}
         </label>
         <div class="table" [class]="customMetricForm.controls.type.value">
             <div class="row" formArrayName="value" *ngFor="let item of customMetricForm.controls.value['controls']; let i = index">
@@ -77,13 +77,13 @@
                     {{customMetricForm.controls.type.value === 'ladder' ? i + 1 : i - 2}}
                 </div>
                 <div class="value">
-                    <input type="text" autocomplete="off" maxlength="20" [formControlName]="i" placeholder="Введіть назву градації">
+                    <input type="text" autocomplete="off" maxlength="20" [formControlName]="i" placeholder="{{'home.config.selectOneName' | translate}}">
                 </div>
             </div>
         </div>
     </div>
 
-    <button mat-button color="primary" type="submit">Далі</button>
+    <button mat-button color="primary" type="submit">{{'home.config.next' | translate}}</button>
 </form>
 
 

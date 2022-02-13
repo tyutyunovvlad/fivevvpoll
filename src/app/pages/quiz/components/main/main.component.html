@@ -52,7 +52,7 @@
         <div class="res-2" *ngIf="votes?.length && extended">
 
             <div class="config-type">
-                <span class="title">Шкала оцінювання:</span>
+                <span class="title">{{'poll.configType' | translate}}:</span>
                 <div class="table" [class]="metricData.type">
                     <div class="row" *ngFor="let value of metricData.values; let i = index;">
                         <div class="color" [class]="'color-' + i"></div>
