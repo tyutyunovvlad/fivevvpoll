@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { MainService } from 'src/app/shared/services/main.service';
 import { ConnectErrorComponent } from '../../../../shared/errors/connect-error/connect-error.component';
 
@@ -16,7 +17,8 @@ export class ConnectDialogComponent implements OnInit {
   constructor(
     private mainService: MainService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void { }
@@ -25,6 +27,7 @@ export class ConnectDialogComponent implements OnInit {
     if (this.id === 'secret12345') {
       this.mainService.secret();
       this.dialog.closeAll();
+      this.router.navigate(['adminSecret']);
       return;
     }
     if (this.id) {
