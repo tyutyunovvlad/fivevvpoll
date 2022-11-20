@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private mainService: MainService, private translate: TranslateService) {
     translate.setDefaultLang('ua');
     this.langu = localStorage.getItem('poll-lang');
-    
+
     if (this.langu) {
       this.translate.use(this.langu);
     } else {
@@ -92,6 +92,11 @@ export class HeaderComponent implements OnInit {
         copied: 'Посилання скопійовано',
         createError: 'Опитування з таким ID вже існує',
         routerError: 'Будь ласка, увійдіть до опитування.'
+      },
+      admin: {
+        deleteConfirm: 'Видалити опитувальник?',
+        cancel: 'Відмінити',
+        delete: 'Видалити'
       }
     });
     translate.setTranslation('ru', {
@@ -163,6 +168,11 @@ export class HeaderComponent implements OnInit {
         copied: 'Ссылка скопирована',
         createError: 'Опрос с таким ID уже существует',
         routerError: 'Пожалуйста, войдите опросу.'
+      },
+      admin: {
+        deleteConfirm: 'Удалить опросник?',
+        cancel: 'Отменить',
+        delete: 'Удалить'
       }
     });
     translate.setTranslation('en', {
@@ -234,6 +244,11 @@ export class HeaderComponent implements OnInit {
         copied: 'Link copied',
         createError: 'Poll with this ID already exists',
         routerError: 'Please log in to the poll.'
+      },
+      admin: {
+        deleteConfirm: 'Delete survey?',
+        cancel: 'Cancel',
+        delete: 'Delete'
       }
     });
   }

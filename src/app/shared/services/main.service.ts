@@ -82,7 +82,7 @@ export class MainService {
   }
 
   public translateAlternatives(): void {
-    
+
     this.metrics[0].values = this.translate.instant('alts')[0];
     this.metrics[1].values = this.translate.instant('alts')[1];
     // this.metrics[2].values = this.translate.instant('alts')[2];
@@ -156,6 +156,13 @@ export class MainService {
         this.optionsSubj.next('empty');
         callback();
       }
+    });
+  }
+
+  public remove(id: string): Promise<any> {
+    this.loadingSubj.next(true);
+    return this.ref.doc(id).delete().finally(() => {
+      this.loadingSubj.next(false);
     });
   }
 
