@@ -263,9 +263,9 @@ export class HeaderComponent implements OnInit {
     if (this.id) {
       if (confirm(this.translate.instant('poll.message.forget') + this.id + '\n' + this.translate.instant('poll.message.leave'))) {
         this.router.navigate(['home']);
-      } else {
-        return;
       }
+    } else {
+      this.router.navigate(['home']);
     }
   }
 
