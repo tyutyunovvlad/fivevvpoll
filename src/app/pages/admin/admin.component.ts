@@ -42,6 +42,9 @@ export class AdminComponent implements OnInit {
         return maxB - maxA;
       });
 
+      console.log(sorted);
+
+
       this.data = sorted;
     });
 

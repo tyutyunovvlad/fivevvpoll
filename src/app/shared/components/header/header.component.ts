@@ -94,9 +94,13 @@ export class HeaderComponent implements OnInit {
         routerError: 'Будь ласка, увійдіть до опитування.'
       },
       admin: {
-        deleteConfirm: 'Видалити опитувальник?',
+        deleteConfirm: 'Видалити опитування?',
         cancel: 'Відмінити',
-        delete: 'Видалити'
+        delete: 'Видалити',
+        name: 'Назва',
+        count: 'Кількість',
+        first: 'Перша відповідь',
+        last: 'Остання відповідь',
       }
     });
     translate.setTranslation('ru', {
@@ -170,9 +174,13 @@ export class HeaderComponent implements OnInit {
         routerError: 'Пожалуйста, войдите опросу.'
       },
       admin: {
-        deleteConfirm: 'Удалить опросник?',
+        deleteConfirm: 'Удалить опрос?',
         cancel: 'Отменить',
-        delete: 'Удалить'
+        delete: 'Удалить',
+        name: 'Название',
+        count: 'Количество',
+        first: 'Первый ответ',
+        last: 'Последний ответ',
       }
     });
     translate.setTranslation('en', {
@@ -246,9 +254,13 @@ export class HeaderComponent implements OnInit {
         routerError: 'Please log in to the poll.'
       },
       admin: {
-        deleteConfirm: 'Delete survey?',
+        deleteConfirm: 'Delete poll?',
         cancel: 'Cancel',
-        delete: 'Delete'
+        delete: 'Delete',
+        name: 'Name',
+        count: 'Count',
+        first: 'First response',
+        last: 'Last response',
       }
     });
   }
